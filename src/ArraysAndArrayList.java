@@ -1,3 +1,4 @@
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -174,7 +175,18 @@ public class ArraysAndArrayList {
             System.out.println(metroCityName);
         }
 
-        // 3.4 Using ListIterator
+        addDisplaySpace();
+
+        // 3.4 fetch elements from the ArrayList by converting it to a Stream (remember Streams can be consumed only once)
+
+        System.out.println("Fetching ArrayList elements by getting a Stream from the ArrayList");
+        employeeNameList.stream().forEach(employeeName -> System.out.println(employeeName));
+
+        addDisplaySpace();
+
+        metroCitiesInIndiaList.stream().forEach(metroCityName -> System.out.println(metroCityName));
+
+        // 3.5 Using ListIterator
         // refer to ListIterator documentation (bi-directional iteration along with CRUD operations)
     }
 
