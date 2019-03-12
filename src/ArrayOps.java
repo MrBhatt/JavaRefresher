@@ -6,6 +6,7 @@ public class ArrayOps {
 
     public static void main(String[] args) {
         arrayOperations();
+        arrayProblems();
     }
 
     private static void arrayOperations() {
@@ -153,5 +154,65 @@ public class ArrayOps {
         // display the value which just got added
         System.out.println("Displaying the 0,0 element of the 2 dimensional array");
         System.out.println(twoDimensionalArray[0][0]);
+    }
+
+    private static void arrayProblems() {
+
+        // ------------------------------------------------------------------
+        //     Find the sum of all elements (integers) in an array
+        // ------------------------------------------------------------------
+
+        int[] integerArray = new int[] {1,2,3,4,5,6,7,8,9};
+
+        // Approach 1: loop over all elements and add the values
+
+        int sumOfElementsOfTheArray = 0;
+
+        for (int arrayElement: integerArray) {
+            sumOfElementsOfTheArray += arrayElement;
+        }
+
+        System.out.println("The sum in approach 1 is: " + sumOfElementsOfTheArray);
+
+        // Approach 2: since the numbers are consecutive and starting with 1, we can use mathematical formulas for the summation
+        // The sum of 'n' consecutive integers is: n*(n+1)/2
+
+        int n = integerArray.length;
+        sumOfElementsOfTheArray = n*(n+1)/2;
+
+        System.out.println("The sum in approach 2 is: " + sumOfElementsOfTheArray);
+
+        // ------------------------------------------------------------------
+        //     Find a missing element in a single dimension array of consecutive integers
+        // ------------------------------------------------------------------
+
+        // 1. assume an array of consecutive integers (1-10) but skip a number
+        // example: {1,2,3,4,5,7,8,9,10} <-- this is missing 6, how do we find it in our code
+
+        int[] missingNumberArray = new int[10];
+        missingNumberArray[0] = 1;missingNumberArray[1] = 2;
+        missingNumberArray[2] = 3;missingNumberArray[3] = 4;
+        missingNumberArray[4] = 5; //missingNumberArray[5] = 6; <-- missing number
+        missingNumberArray[6] = 7;missingNumberArray[7] = 8;
+        missingNumberArray[8] = 9;missingNumberArray[9] = 10;
+
+        // approach 1: find the sum for the series if the number was not missing and subtract the actual/current sum (with missing element) and subtract
+
+        // assumption, the array 1-10 (i.e. 10 elements)
+
+        n = missingNumberArray.length;
+        int sumIfTheNumberWasNotMissing = n*(n+1)/2;
+
+        // loop over the elements of the array and compute the sum
+        int missingNumberArrayRealSum = 0;
+        for (int elementValue:missingNumberArray) {
+            missingNumberArrayRealSum += elementValue;
+        }
+
+        // subtract and find the missing number
+        int missingNumber = sumIfTheNumberWasNotMissing - missingNumberArrayRealSum;
+
+        System.out.println("The missing number is: " + missingNumber);
+
     }
 }
