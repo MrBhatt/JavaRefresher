@@ -111,6 +111,8 @@ public class ArrayOps {
         //     Copy all elements of the array (Clone, and using Arrays util class)
         // ------------------------------------------------------------------
 
+        addDisplaySpace();
+
         // 6. Copy all elements of an array in to a new array
 
         // 6.1 Using clone (Array which is an object internally implements the Cloneable interface and hence we can call the clone method)
@@ -135,5 +137,21 @@ public class ArrayOps {
         // copyOf - Copy array
         // sort
         // create a Stream out of the array
+
+        // ------------------------------------------------------------------
+        //     Multi-dimensional array (more than one dimension - pair of square brackets)
+        // ------------------------------------------------------------------
+        addDisplaySpace();
+
+        int[][] twoDimensionalArray = new int[2][3];
+        // AT THIS STAGE: a two dimensional array (of lengths 2 and 3 respectively are initialized)
+        // think of it as a 2x3 matrix
+
+        // assign a value to the 0,0 cell of the matrix (2 dimensional array)
+        twoDimensionalArray[0][0] = 1;
+
+        // display the value which just got added
+        System.out.println("Displaying the 0,0 element of the 2 dimensional array");
+        System.out.println(twoDimensionalArray[0][0]);
     }
 }
