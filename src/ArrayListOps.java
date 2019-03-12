@@ -1,82 +1,11 @@
-import java.sql.SQLOutput;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
-public class ArraysAndArrayList {
+import static util.DisplayUtil.addDisplaySpace;
 
+public class ArrayListOps {
     public static void main(String[] args) {
-        arrayOperations();
         arrayListOperations();
-    }
-
-    private static void arrayOperations() {
-
-        // Arrays are TypeSafe (You define the type of items the array can hold during initialization itself)
-        // Homogeneous data structure
-        // Hence, you can not store any other type in the array it is initialized with
-
-        // 1. initialize array
-
-        // 1.1 an empty array with no elements (all elements will be initialized to null)
-        String[] employeeNamesArray = new String[10];
-
-        // 1.2 an array with elements
-        String[] metroCitiesInIndiaArray = new String[]{"Delhi", "Kolkata", "Mumbai", "Chennai"};
-
-        // 1.3 simplified with elements
-        String[] majorITCitiesInIndiaArray = {"Bengaluru", "Pune", "Hyderabad", "Noida"};
-
-
-        // 2. Find the length of the array (it is referred to as length, not size)
-
-        int employNamesArrayLength = employeeNamesArray.length;
-        System.out.println("employeeNamesArrayLength = " + employNamesArrayLength);
-        addDisplaySpace();
-
-        // 3. Display all elements of the array
-
-        // 3.1 Iterate with a for loop based on index
-        System.out.println("Displaying the elements of the employeeNamesArray, all elements should be null");
-        for (int arrayIndex = 0; arrayIndex < employNamesArrayLength; arrayIndex++) {
-            System.out.println(employeeNamesArray[arrayIndex]);
-        }
-        addDisplaySpace();
-
-        // 3.2 Use a forEach loop to avoid referring by the index
-        System.out.println("Displaying the elements of the metroCitiesInIndiaArray using forEach");
-        for (String metroCityName : metroCitiesInIndiaArray) {
-            System.out.println(metroCityName);
-        }
-        addDisplaySpace();
-
-        // 3.3 convert the array in to a Stream (Java 1.8 and above) and display all elements
-        System.out.println("Displaying the elements of the majorItCitiesInIndiaArray via Streams");
-
-        Arrays.stream(majorITCitiesInIndiaArray).forEach(majorCity -> System.out.println(majorCity));
-        addDisplaySpace();
-
-        // 4. Add elements to an array (add it to a position by index, lets choose 0th index to add it to the first position)
-        employeeNamesArray[0] = "Anupam Bhatt";
-        // double check it got added, it should not be null
-        System.out.println("Element 0 in the employeeNamesArray: " + employeeNamesArray[0]);
-
-        // 5. Copy all elements of an array in to a new array
-
-        // 5.1 Using clone
-        System.out.println("Copying array in to a new one using clone method on the array");
-        String[] newEmployeeNamesArray = employeeNamesArray.clone();
-
-        // display all elements from the copied array to confirm
-        Arrays.stream(newEmployeeNamesArray).forEach(newEmployeeName -> System.out.println(newEmployeeName));
-
-        // 5.2 Using Arrays utility class
-        System.out.println("Copying array in to anew one using Arrays.copyOf(..)");
-        String[] reallyNewEmployeeArray = Arrays.copyOf(newEmployeeNamesArray, newEmployeeNamesArray.length);
-        // display again to make sure this new array has all the elements
-        Arrays.stream(reallyNewEmployeeArray).forEach(reallyNewEmployeeName -> System.out.println(reallyNewEmployeeName));
-
     }
 
     private static void arrayListOperations() {
@@ -88,12 +17,13 @@ public class ArraysAndArrayList {
         // 1. Instantiate an ArrayList
 
         // 1.1 instantiate a raw ArrayList (not type safe, can lead to class cast exception when extracting elements)
-        List employeeNameList = new ArrayList();
+        List employeeNameList = new java.util.ArrayList();
+
         // the employeeNameArrayList will be an empty arrayList unless elements are added to it explicitly
         System.out.println(employeeNameList.isEmpty()); // should be true
 
         // 1.2 instantiate an type safe ArrayList
-        List<String> metroCitiesInIndiaList = new ArrayList<>();
+        List<String> metroCitiesInIndiaList = new java.util.ArrayList<>();
         System.out.println(metroCitiesInIndiaList.isEmpty()); // should be true
 
         addDisplaySpace();
@@ -188,9 +118,5 @@ public class ArraysAndArrayList {
 
         // 3.5 Using ListIterator
         // refer to ListIterator documentation (bi-directional iteration along with CRUD operations)
-    }
-
-    private static void addDisplaySpace() {
-        System.out.println("---------------------------------------------------------------\n");
     }
 }
