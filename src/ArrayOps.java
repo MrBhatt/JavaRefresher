@@ -20,7 +20,7 @@ public class ArrayOps {
         // Fixed size (You provide the size during initialization). The length property points to the capacity of the array
         // Array will occupy space as per its defined size (not by the number of elements in it)
         // Have dimension (one or more). Dimensions are represented by a pair of square brackets. Single dimension array is a linear data structure
-        // Array elements are referenced by an index
+        // Arrays are "random access" data structure: elements are referenced by an index
         // Fills up the element spaces with default values, when values are not provided during initialization
         // example: all elements of a integer array have a value of 0, and all String or other object reference type elements are marked as "null"
 
@@ -137,6 +137,7 @@ public class ArrayOps {
         // Example:
         // copyOf - Copy array
         // sort
+        // asList - create an ArrayList (see other class) from an array
         // create a Stream out of the array
 
         // ------------------------------------------------------------------
@@ -156,19 +157,77 @@ public class ArrayOps {
         System.out.println(twoDimensionalArray[0][0]);
     }
 
+
+    /**
+     * 1. Find/Search Probelms
+     *   1.1 Find a specific element in an array of integers (brute force and optimized)
+     * 2. Aggregates
+     * 3. Extract - sub arrays
+     * 4. Manipulate
+     */
     private static void arrayProblems() {
+
+        // =====================================
+        //    Find a specific element in an unsorted array of integers (no duplicates)
+        // =====================================
+
+        //  Available information:
+        // --------------------------
+        //  Array of 7 integers (n=7)
+        //  Ordering: unsorted
+        //  Duplicates: No
+
+        int[] integerArray = {2,5,7,3,4,9,8};
+        System.out.println("Unsorted Array: " + integerArray);
+
+        // find if it has the element with a value of 8?
+        int integerToSearch = 8;
+        int n = integerArray.length;
+
+        // Approach 1: (brute force)
+        // Iterate over the array and look for the element
+        // Worst case: need to iterate over all elements, hence complexity: O(n)
+        // -----------------------------
+
+        for (int index = 0; index < n; index++) {
+            if (integerArray[index] == integerToSearch) {
+                // found the element
+                System.out.println("Element found at index: " + index);
+            }
+        }
+
+        // Approach 2: if we sort the array then we could do a binary search
+        // Since array is sorted now, we could divide the array in half and find the element.
+        // repeat the process till the element is found
+        // Worst case: n/2 + n/4 + n/8 + ... 1  = log2 N + sorting complexity ?
+        // -----------------------------
+
+        // sort the array
+        Arrays.sort(integerArray);
+        System.out.println("-------------------------------------------");
+        System.out.println("SORTED ARRAY");
+        System.out.println("-------------------------------------------");
+        Arrays.stream(integerArray).forEach(element ->
+        { System.out.print(element); System.out.print(" "); });
+
+        int startIndex = 0;
+        int endIndex = n-1;
+
+        System.out.println("\n");
+
+        searchElement(integerArray, integerToSearch, startIndex, endIndex);
 
         // ------------------------------------------------------------------
         //     Find the sum of all elements (integers) in an array
         // ------------------------------------------------------------------
 
-        int[] integerArray = new int[] {1,2,3,4,5,6,7,8,9};
+        int[] integerArrayForSum = new int[] {1,2,3,4,5,6,7,8,9};
 
         // Approach 1: loop over all elements and add the values
 
         int sumOfElementsOfTheArray = 0;
 
-        for (int arrayElement: integerArray) {
+        for (int arrayElement: integerArrayForSum) {
             sumOfElementsOfTheArray += arrayElement;
         }
 
@@ -177,7 +236,6 @@ public class ArrayOps {
         // Approach 2: since the numbers are consecutive and starting with 1, we can use mathematical formulas for the summation
         // The sum of 'n' consecutive integers is: n*(n+1)/2
 
-        int n = integerArray.length;
         sumOfElementsOfTheArray = n*(n+1)/2;
 
         System.out.println("The sum in approach 2 is: " + sumOfElementsOfTheArray);
@@ -214,5 +272,29 @@ public class ArrayOps {
 
         System.out.println("The missing number is: " + missingNumber);
 
+    }
+
+    private static void searchElement(int[] integerArray, int integerToSearch, int startIndex, int endIndex) {
+        int offSet = endIndex - startIndex;
+        int midIndex = startIndex + offSet/2;
+        System.out.println("startIndex: " + startIndex);
+        System.out.println("endIndex:" + endIndex);
+        System.out.println("midIndex:" + midIndex );
+
+        if (integerArray[midIndex] == integerToSearch) {
+            System.out.println("Element found: " + integerArray[midIndex]);
+            System.out.println("Found the integer: " + integerArray[midIndex] + " at the index: " + midIndex);
+            return;
+        }
+
+        System.out.println("Current element: " + integerArray[midIndex]);
+
+        if (integerArray[midIndex] < integerToSearch) {
+            startIndex = midIndex + 1;
+        } else {
+            endIndex = midIndex -1;
+        }
+
+        searchElement(integerArray, integerToSearch, startIndex, endIndex);
     }
 }
